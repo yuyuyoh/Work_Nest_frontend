@@ -1,0 +1,23 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <h2>Connexion Employeur</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" placeholder="Entrez votre email">
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
+          Veuillez entrer un email valide.
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" formControlName="password" [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" placeholder="Votre mot de passe">
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+          Mot de passe requis.
+        </div>
+      </div>
+      <button type="submit" [disabled]="loginForm.invalid">Connexion</button>
+    </form>
+    <div *ngIf="error" class="alert-error">{{ error }}</div>
+  </div>
+</div>

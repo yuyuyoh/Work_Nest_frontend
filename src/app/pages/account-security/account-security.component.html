@@ -1,0 +1,39 @@
+<div class="security-section">
+  <h2>🔒 Sécurité du compte</h2>
+  <form (ngSubmit)="updateCredentials()" #securityForm="ngForm">
+    <div>
+      <label for="email">Nouvel email de connexion</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="credentials.email"
+        placeholder="Nouvel email"
+        required
+      />
+    </div>
+    <div>
+      <label for="currentPassword">Mot de passe actuel *</label>
+      <input
+        type="password"
+        id="currentPassword"
+        name="currentPassword"
+        [(ngModel)]="credentials.currentPassword"
+        placeholder="Mot de passe actuel"
+        required
+      />
+    </div>
+    <div>
+      <label for="newPassword">Nouveau mot de passe</label>
+      <input
+        type="password"
+        id="newPassword"
+        name="newPassword"
+        [(ngModel)]="credentials.newPassword"
+        placeholder="Nouveau mot de passe"
+      />
+    </div>
+    <button type="submit" [disabled]="securityForm.invalid">Enregistrer</button>
+  </form>
+  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+</div>

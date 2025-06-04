@@ -1,0 +1,30 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <h2>Connexion</h2>
+    <div class="form-inner">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email"
+                 [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+                 placeholder="Entrez votre email">
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
+            <small *ngIf="loginForm.get('email')?.errors?.['required']">L'email est requis</small>
+            <small *ngIf="loginForm.get('email')?.errors?.['email']">Format invalide</small>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="password">Mot de passe</label>
+          <input id="password" type="password" formControlName="password"
+                 [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                 placeholder="Votre mot de passe">
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+            <small>Le mot de passe est requis</small>
+          </div>
+        </div>
+        <button type="submit" [disabled]="loginForm.invalid">Se connecter</button>
+      </form>
+      <div *ngIf="error" class="alert-error">{{ error }}</div>
+    </div>
+  </div>
+</div>

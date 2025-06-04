@@ -1,0 +1,14 @@
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+}
+label {
+  margin-top: 10px;
+}
+input, textarea, select {
+  margin-bottom: 10px;
+}
+button {
+  margin-top: 10px;
+}

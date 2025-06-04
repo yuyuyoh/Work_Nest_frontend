@@ -1,0 +1,53 @@
+<div class="dashboard-container">
+  <h2>Bienvenue sur votre tableau de bord employeur</h2>
+
+  <div *ngIf="isLoading" class="loading">
+    Chargement des offres...
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!isLoading && jobs.length === 0 && !error" class="empty">
+    Vous n’avez publié aucune offre pour le moment.
+  </div>
+
+  <ul *ngIf="!isLoading && jobs.length > 0">
+    <li *ngFor="let job of jobs" class="job-item">
+      <strong>{{ job.title }}</strong> - {{ job.location }}<br>
+      Salaire : {{ job.salaryMin }} à {{ job.salaryMax }} €<br>
+      <small>Posté le {{ job.postedAt | date:'shortDate' }}</small>
+      <br>
+      <button (click)="deleteJob(job.id)" class="btn-supprimer" aria-label="Supprimer l'offre">
+        Supprimer
+      </button>
+      <button (click)="toggleApplications(job.id!)" class="btn-candidatures" aria-label="Voir les candidats">
+        {{ showApplications[job.id!] ? 'Masquer' : 'Voir' }} les candidats
+      </button>
+
+      <!-- Affichage des candidatures -->
+      <div *ngIf="showApplications[job.id!]" class="applications-list">
+        <div *ngIf="loadingApplications[job.id!]">Chargement des candidatures...</div>
+        <div *ngIf="applicationsError[job.id!]">{{ applicationsError[job.id!] }}</div>
+        <ul *ngIf="applicationsByJob[job.id!] && applicationsByJob[job.id!].length > 0">
+          <li *ngFor="let app of applicationsByJob[job.id!]">
+            <strong>{{ app.jobseekerFirstName }} {{ app.jobseekerLastName }}</strong><br>
+            Email : {{ app.jobseekerEmail }}<br>
+            <span *ngIf="app.jobseekerPhone">Téléphone : {{ app.jobseekerPhone }}<br></span>
+            CV :
+            <a *ngIf="app.jobseekerCV"
+               [href]="'/api/files/resume/' + app.jobseekerCV"
+               target="_blank" rel="noopener">Télécharger</a>
+            <span *ngIf="!app.jobseekerCV">Non fourni</span><br>
+            Statut : {{ app.status }}<br>
+            Date : {{ app.appliedAt | date:'short' }}
+          </li>
+        </ul>
+        <div *ngIf="applicationsByJob[job.id!] && applicationsByJob[job.id!].length === 0">
+          Aucun candidat pour cette offre.
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

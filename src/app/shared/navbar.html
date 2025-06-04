@@ -1,0 +1,31 @@
+<nav class="navbar">
+  <a routerLink="/">Accueil</a>
+  <a routerLink="/jobs">Offres d’emploi</a>
+
+  <!-- Zone non connecté (aucun rôle) -->
+  <ng-container *ngIf="!role">
+    <a routerLink="/register">Inscription</a>
+    <a routerLink="/login">Connexion</a>
+  </ng-container>
+
+  <!-- Zone candidat -->
+  <ng-container *ngIf="role === 'CANDIDATE'">
+    <a routerLink="/profile">Mon profil</a>
+    <a routerLink="/applications">Mes candidatures</a>
+    <a routerLink="/account-security">Sécurité du compte</a>
+  </ng-container>
+
+  <!-- Zone employeur -->
+  <ng-container *ngIf="role === 'EMPLOYER'">
+    <a routerLink="/add-job">Publier une offre</a>
+    <a routerLink="/employer-dashboard">Espace Employeur</a>
+  </ng-container>
+
+  <!-- Zone admin -->
+  <ng-container *ngIf="role === 'ADMIN'">
+    <a routerLink="/admin">Administration</a>
+  </ng-container>
+
+  <!-- Déconnexion visible pour tous les connectés -->
+  <a *ngIf="role" (click)="logout()" style="cursor:pointer;">Déconnexion</a>
+</nav>

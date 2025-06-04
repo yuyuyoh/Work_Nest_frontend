@@ -1,0 +1,88 @@
+<div class="form-container">
+
+  <!-- Choix du type d'utilisateur -->
+  <div class="user-type-choice" style="margin-bottom: 2em;">
+    <label>
+      <input type="radio" name="userType" [(ngModel)]="userType" value="jobseeker" /> Candidat
+    </label>
+    <label style="margin-left:2em;">
+      <input type="radio" name="userType" [(ngModel)]="userType" value="employer" /> Employeur
+    </label>
+  </div>
+
+  <!-- ======================= -->
+  <!-- Formulaire Candidat -->
+  <!-- ======================= -->
+  <h2 *ngIf="userType === 'jobseeker'">Inscription Candidat</h2>
+  <form *ngIf="userType === 'jobseeker' && !success" (ngSubmit)="onSubmit()">
+    <!-- (tout ton code actuel à l'intérieur de ce bloc) -->
+    <!-- ... (copie simplement tout ton HTML candidat ici) ... -->
+    <input type="text" [(ngModel)]="form.firstName" name="firstName" placeholder="Prénom" required>
+    <input type="text" [(ngModel)]="form.lastName" name="lastName" placeholder="Nom" required>
+    <input type="email" [(ngModel)]="form.email" name="email" placeholder="Email" required>
+    <input type="password" [(ngModel)]="form.password" name="password" placeholder="Mot de passe" required>
+    <input type="text" [(ngModel)]="form.phone" name="phone" placeholder="Téléphone">
+    <input type="text" [(ngModel)]="form.education" name="education" placeholder="Formation">
+    <input type="text" [(ngModel)]="form.specialty" name="specialty" placeholder="Spécialité">
+    <!-- ... expériences et compétences comme avant ... -->
+    <section>
+      <h4>Expériences professionnelles</h4>
+      <div class="experience-fields">
+        <input type="text" [(ngModel)]="experience.title" name="expTitle" placeholder="Titre">
+        <input type="text" [(ngModel)]="experience.company" name="expCompany" placeholder="Entreprise">
+        <input type="date" [(ngModel)]="experience.startDate" name="expStart">
+        <input type="date" [(ngModel)]="experience.endDate" name="expEnd">
+        <input type="text" [(ngModel)]="experience.description" name="expDesc" placeholder="Description">
+        <button type="button" (click)="addExperience()">Ajouter expérience</button>
+      </div>
+      <ul>
+        <li *ngFor="let exp of form.experiences; let i = index">
+          {{ exp.title }} à {{ exp.company }} ({{ exp.startDate }} – {{ exp.endDate }})
+          <button type="button" (click)="removeExperience(i)">❌</button>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h4>Compétences</h4>
+      <div class="skill-fields">
+        <input type="text" [(ngModel)]="skill.name" name="skillName" placeholder="Compétence">
+        <select [(ngModel)]="skill.level" name="skillLevel">
+          <option value="">Niveau</option>
+          <option value="BEGINNER">Débutant</option>
+          <option value="INTERMEDIATE">Intermédiaire</option>
+          <option value="ADVANCED">Avancé</option>
+        </select>
+        <button type="button" (click)="addSkill()">Ajouter</button>
+      </div>
+      <ul>
+        <li *ngFor="let skill of form.skills; let i = index">
+          {{ skill.name }} ({{ skill.level }})
+          <button type="button" (click)="removeSkill(i)">❌</button>
+        </li>
+      </ul>
+    </section>
+    <button type="submit" [disabled]="isLoading">Créer mon compte</button>
+    <div *ngIf="error" style="color: red; margin-top: 1em;">{{ error }}</div>
+  </form>
+
+  <!-- ======================= -->
+  <!-- Formulaire Employeur -->
+  <!-- ======================= -->
+  <h2 *ngIf="userType === 'employer'">Inscription Employeur</h2>
+  <form *ngIf="userType === 'employer' && !success" (ngSubmit)="onSubmit()">
+    <input type="text" [(ngModel)]="employerForm.name" name="employerName" placeholder="Nom de l'entreprise" required>
+    <input type="email" [(ngModel)]="employerForm.email" name="employerEmail" placeholder="Email" required>
+    <input type="password" [(ngModel)]="employerForm.password" name="employerPassword" placeholder="Mot de passe" required>
+    <input type="text" [(ngModel)]="employerForm.phone" name="employerPhone" placeholder="Téléphone">
+    <input type="text" [(ngModel)]="employerForm.industry" name="employerIndustry" placeholder="Secteur d'activité">
+    <input type="text" [(ngModel)]="employerForm.address" name="employerAddress" placeholder="Adresse">
+    <textarea [(ngModel)]="employerForm.description" name="employerDescription" placeholder="Description"></textarea>
+    <button type="submit" [disabled]="isLoading">Créer mon compte</button>
+    <div *ngIf="error" style="color: red; margin-top: 1em;">{{ error }}</div>
+  </form>
+
+  <div *ngIf="success" style="color: green; text-align: center;">
+    Inscription réussie ! Vous pouvez vous connecter.
+  </div>
+</div>

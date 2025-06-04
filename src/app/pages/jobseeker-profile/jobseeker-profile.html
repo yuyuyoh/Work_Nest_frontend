@@ -1,0 +1,52 @@
+<div class="profile-container" *ngIf="jobseeker">
+  <h2>Profil du candidat</h2>
+
+  <!-- Affichage classique -->
+  <div *ngIf="!editMode">
+    <p><strong>Nom :</strong> {{ jobseeker.firstName }} {{ jobseeker.lastName }}</p>
+    <p><strong>Téléphone :</strong> {{ jobseeker.phone }}</p>
+    <p><strong>Spécialité :</strong> {{ jobseeker.specialty }}</p>
+    <p><strong>Email :</strong> {{ jobseeker.email }}</p>
+    <p><strong>Diplôme :</strong> {{ jobseeker.education }}</p>
+    <!-- Ajoute d'autres champs si besoin -->
+
+    <button (click)="enableEdit()">Modifier</button>
+  </div>
+
+  <!-- Formulaire d’édition -->
+  <form *ngIf="editMode" (ngSubmit)="saveProfile()">
+    <label>Prénom :</label>
+    <input [(ngModel)]="editedJobseeker.firstName" name="firstName" required />
+    <label>Nom :</label>
+    <input [(ngModel)]="editedJobseeker.lastName" name="lastName" required />
+    <label>Téléphone :</label>
+    <input [(ngModel)]="editedJobseeker.phone" name="phone" />
+    <label>Spécialité :</label>
+    <input [(ngModel)]="editedJobseeker.specialty" name="specialty" />
+    <label>Email :</label>
+    <input [(ngModel)]="editedJobseeker.email" name="email" type="email" />
+    <label>Diplôme :</label>
+    <input [(ngModel)]="editedJobseeker.education" name="education" />
+    <!-- Ajoute d'autres champs si besoin -->
+
+    <button type="submit">Enregistrer</button>
+    <button type="button" (click)="cancelEdit()">Annuler</button>
+  </form>
+
+  <hr />
+
+  <h3>📎 CV</h3>
+
+  <div *ngIf="downloadUrl; else noCvBlock">
+    <a [href]="downloadUrl" target="_blank">📄 Voir le CV actuel</a>
+    <button (click)="deleteCV()">Supprimer le CV</button>
+  </div>
+
+  <ng-template #noCvBlock>
+    <p>Aucun CV enregistré.</p>
+  </ng-template>
+
+  <label>Uploader un nouveau CV :</label>
+  <input type="file" (change)="onFileSelected($event)" accept=".pdf" />
+  <button (click)="uploadCV()">Charger votre CV</button>
+</div>

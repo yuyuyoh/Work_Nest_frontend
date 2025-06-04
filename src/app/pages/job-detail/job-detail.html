@@ -1,0 +1,19 @@
+<div class="job-detail-container" *ngIf="job">
+  <h2>{{ job.title }}</h2>
+  <p><strong>Description :</strong> {{ job.description }}</p>
+  <p><strong>Expérience minimum en année :</strong> {{ job.experience }}</p>
+  <p><strong>Nombre de postes à pourvoir :</strong> {{ job.vacancies }}</p>
+  <p><strong>Localisation :</strong> {{ job.location }}</p>
+  <p><strong>Salaire :</strong> {{ job.salaryMin }} € – {{ job.salaryMax }} €</p>
+
+  <a [routerLink]="['/jobs']"> Retour à la liste </a>
+  <br>
+  <br>
+  <a [routerLink]="['/apply', job.id]"> Postuler à cette offre</a>
+
+
+
+</div>
+
+<div *ngIf="isLoading">Chargement...</div>
+<div *ngIf="error">{{ error }}</div>

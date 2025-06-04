@@ -1,0 +1,56 @@
+<div class="job-list-container">
+  <h2>Offres d’emploi disponibles</h2>
+
+  <!-- BARRE DE FILTRE & TRI -->
+  <div class="filter-bar" style="margin-bottom: 1.5em;">
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      placeholder="Titre"
+      class="input"
+    />
+    <input
+      type="text"
+      [(ngModel)]="selectedLocation"
+      placeholder="Ville"
+      class="input"
+    />
+    <input
+      type="number"
+      [(ngModel)]="salaryMin"
+      placeholder="Salaire min"
+      class="input"
+      min="0"
+    />
+    <input
+      type="number"
+      [(ngModel)]="salaryMax"
+      placeholder="Salaire max"
+      class="input"
+      min="0"
+    />
+    <select [(ngModel)]="selectedType" class="input">
+      <option value="">Type</option>
+      <option value="FULL_TIME">FULL_TIME</option>
+      <option value="PART_TIME">PART_TIME</option>
+      <option value="FREELANCE">FREELANCE</option>
+    </select>
+    <button (click)="filterJobs()">Filtrer</button>
+    <button (click)="loadJobsSortedByDate()">Trier par date</button>
+  </div>
+
+  <div *ngIf="isLoading">Chargement...</div>
+  <div *ngIf="error">{{ error }}</div>
+
+  <div *ngIf="!isLoading && jobs.length === 0">
+    Aucune offre d’emploi pour le moment.
+  </div>
+
+  <div *ngFor="let job of jobs" class="job-card">
+    <h3>{{ job.title }}</h3>
+    <p><strong>Localisation:</strong> {{ job.location }}</p>
+    <p><strong>Salaire:</strong> {{ job.salaryMin }}€ – {{ job.salaryMax }}€</p>
+    <p>{{ job.description }}</p>
+    <a [routerLink]="['/jobs', job.id]">🔎 Voir le détail</a>
+  </div>
+</div>

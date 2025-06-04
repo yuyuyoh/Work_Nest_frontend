@@ -1,0 +1,16 @@
+<table>
+  <thead>
+  <tr>
+    <th>Offre</th>
+    <th>Date de candidature</th>
+    <th>Statut</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let app of applications">
+    <td>{{ app.jobTitle }}</td>
+    <td>{{ app.appliedAt | date:'dd/MM/yyyy HH:mm' }}</td>
+    <td>{{ app.status || '—' }}</td>
+  </tr>
+  </tbody>
+</table>

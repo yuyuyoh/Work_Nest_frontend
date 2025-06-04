@@ -1,0 +1,60 @@
+.navbar {
+  background: linear-gradient(90deg, #2557a7 60%, #1b3557 100%);
+  padding: 0.8rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  box-shadow: 0 2px 12px #18304b22;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar a {
+  color: #f7fafc;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.09rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.6rem;
+  transition: background 0.18s, color 0.18s;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.navbar a:hover, .navbar a.active, .navbar a.router-link-active {
+  background: #f2f7fc;
+  color: #2557a7;
+  text-decoration: none;
+}
+
+.navbar a:active {
+  background: #dbeafe;
+  color: #1b3557;
+}
+
+.navbar .logout {
+  margin-left: auto;
+  background: #ff4c4c;
+  color: white !important;
+  transition: background 0.15s;
+}
+.navbar .logout:hover {
+  background: #ff2a2a;
+  color: #fff !important;
+}
+
+/* Responsive adaptation */
+@media (max-width: 700px) {
+  .navbar {
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0.7rem 0.5rem;
+  }
+  .navbar a {
+    font-size: 1rem;
+    padding: 0.42rem 0.7rem;
+  }
+}

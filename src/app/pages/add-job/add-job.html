@@ -1,0 +1,35 @@
+<h2>Publier une offre d'emploi</h2>
+<form (ngSubmit)="submitJob()" #jobForm="ngForm">
+  <label>Titre</label>
+  <input [(ngModel)]="job.title" name="title" required>
+
+  <label>Description</label>
+  <textarea [(ngModel)]="job.description" name="description" required></textarea>
+
+  <label>Type</label>
+  <select [(ngModel)]="job.type" name="type" required>
+    <option value="FULL_TIME">FULL_TIME</option>
+    <option value="PART_TIME">PART_TIME</option>
+    <option value="FREELANCE">FREELANCE</option>
+  </select>
+
+  <label>Lieu</label>
+  <input [(ngModel)]="job.location" name="location" required>
+
+  <label>Salaire minimum</label>
+  <input [(ngModel)]="job.salaryMin" name="salaryMin" type="number">
+
+  <label>Salaire maximum</label>
+  <input [(ngModel)]="job.salaryMax" name="salaryMax" type="number">
+
+  <label>Expérience (années)</label>
+  <input [(ngModel)]="job.experience" name="experience" type="number">
+
+  <label>Nombre de postes</label>
+  <input [(ngModel)]="job.vacancies" name="vacancies" type="number">
+
+  <button type="submit">Publier</button>
+</form>
+
+<div *ngIf="success"> Offre publiée !</div>
+<div *ngIf="error">{{ error }}</div>

@@ -1,0 +1,19 @@
+<div class="form-container">
+  <h2>Postuler à l'offre n°{{ jobId }}</h2>
+
+  <form (ngSubmit)="submitApplication()" #appForm="ngForm">
+    <!-- Champ pour uploader le CV (optionnel) -->
+    <label for="cv">CV (PDF, DOC...)</label>
+    <input
+      type="file"
+      id="cv"
+      (change)="onFileSelected($event)"
+      accept=".pdf,.doc,.docx"
+    />
+
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <div *ngIf="success" class="success">✅ Candidature envoyée avec succès !</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+</div>

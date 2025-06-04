@@ -1,0 +1,66 @@
+.security-section {
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 0 12px #0001;
+}
+.security-section h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #20549f;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+.security-section form > div {
+  margin-bottom: 1.2rem;
+}
+.security-section label {
+  display: block;
+  margin-bottom: .3rem;
+  font-weight: 600;
+  color: #333;
+}
+.security-section input {
+  width: 100%;
+  padding: .55rem .8rem;
+  border-radius: .5rem;
+  border: 1px solid #b0b0b0;
+  font-size: 1rem;
+  background: #f7faff;
+  outline: none;
+  transition: border 0.2s;
+}
+.security-section input:focus {
+  border: 1.5px solid #20549f;
+}
+.security-section button {
+  display: block;
+  margin: 1.2rem auto 0 auto;
+  padding: .7rem 1.8rem;
+  border-radius: .7rem;
+  background: #20549f;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.security-section button:disabled {
+  background: #aab8d3;
+  cursor: not-allowed;
+}
+.success {
+  color: #388e3c;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+.error {
+  color: #d32f2f;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: bold;
+}
